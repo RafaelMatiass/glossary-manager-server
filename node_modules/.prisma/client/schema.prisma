@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Users {
+  prontuario String @id @default(uuid())
+  name       String
+  password   String
+}
+
+model Course {
+  id          String     @id @default(uuid())
+  name        String
+  description String?
+  glossary    Glossary[]
+}
+
+model Glossary {
+  id       String @id @default(uuid())
+  courseId String
+
+  name        String
+  description String?
+
+  course     Course       @relation(fields: [courseId], references: [id])
+  Discipline Discipline[]
+}
+
+model Discipline {
+  id         String @id @default(uuid())
+  glossaryId String
+
+  name        String
+  description String?
+  year        String?
+
+  glossary                   Glossary                     @relation(fields: [glossaryId], references: [id])
+  Term_Discipline_Definition Term_Discipline_Definition[]
+}
+
+model Term {
+  id   String @id @default(uuid())
+  name String
+
+  Term_Discipline_Definition Term_Discipline_Definition[]
+  Translation                Translation[]
+}
+
+model Definition {
+  id       String @id @default(uuid())
+  sourceId String
+
+  description String?
+  page        String  @unique
+
+  Term_Discipline_Definition Term_Discipline_Definition[]
+  source                     Source                       @relation(fields: [sourceId], references: [sourceId])
+}
+
+model Translation {
+  translationId String @id @default(uuid())
+  termId        String @default(uuid())
+  sourceId      String
+
+  language    String?
+  translation String?
+  page        String?
+
+  source Source @relation(fields: [sourceId], references: [sourceId])
+  term   Term   @relation(fields: [termId], references: [id])
+}
+
+model Source {
+  sourceId         String  @id @default(uuid())
+  title            String?
+  publisher        String?
+  year             String?
+  type_publication String?
+
+  Source_Authorship Source_Authorship[]
+  Translation       Translation[]
+  Definition        Definition[]
+}
+
+model Author {
+  authorId          String              @id @default(uuid())
+  name              String?
+  Source_Authorship Source_Authorship[]
+}
+
+model Term_Discipline_Definition {
+  Id           String  @id @default(uuid())
+  disciplineId String
+  termId       String
+  definitionId String?
+
+  discipline Discipline  @relation(fields: [disciplineId], references: [id])
+  definition Definition? @relation(fields: [definitionId], references: [id])
+  term       Term        @relation(fields: [termId], references: [id])
+}
+
+model Source_Authorship {
+  Id String @id @default(uuid())
+
+  sourceId String
+  authorId String?
+
+  author Author? @relation(fields: [authorId], references: [authorId])
+  source Source  @relation(fields: [sourceId], references: [sourceId])
+}
