@@ -67,4 +67,32 @@ export class SourceAuthorshipController {
   async remove(@Param('id') Id: string) {
     return this.prisma.source_Authorship.delete({ where: { Id } });
   }
+
+  @Delete('/sourceId/:sourceId')
+  async removeSource(@Param('sourceId') sourceId: string) {
+    try {
+      const sources = await this.prisma.source_Authorship.findMany({
+        where: { sourceId: sourceId },
+      });
+
+      if (sources.length === 0) {
+        throw new Error('Nenhuma entrada encontrada');
+      }
+
+      const sourceIds = sources.map((source) => source.Id);
+      
+      const deleteResult =
+        await this.prisma.source_Authorship.deleteMany({
+          where: {
+            Id: {
+              in: sourceIds,
+            },
+          },
+        });
+
+      return deleteResult;
+    } catch (error) {
+      throw new Error(`Erro ao excluir termo do terciário: ${error.message}`);
+    }
+  }
 }

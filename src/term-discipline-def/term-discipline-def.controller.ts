@@ -82,13 +82,12 @@ export class TermDisciplineDefController {
       }
 
       const termIds = terms.map((term) => term.Id);
-
-      // Deleta todas as entradas correspondentes na tabela term_Discipline_Definition
+      
       const deleteResult =
         await this.prisma.term_Discipline_Definition.deleteMany({
           where: {
             Id: {
-              in: termIds, // Especifica os IDs a serem deletados
+              in: termIds,
             },
           },
         });
