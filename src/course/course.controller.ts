@@ -19,7 +19,7 @@ export class CourseController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {  // Alterado para 'number'
     return this.prisma.course.findUnique({ where: { id } });
   }
 
@@ -30,7 +30,7 @@ export class CourseController {
 
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,  // Alterado para 'number'
     @Body()
     data: {
       name?: string;
@@ -41,7 +41,7 @@ export class CourseController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {  
     return this.prisma.course.delete({ where: { id } });
   }
 }

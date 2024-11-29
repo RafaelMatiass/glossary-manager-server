@@ -3,46 +3,46 @@ export declare class TermDisciplineDefController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        Id: string;
-        disciplineId: string;
-        termId: string;
-        definitionId: string;
+        id: number;
+        termId: number;
+        disciplineId: number;
+        definitionId: number;
     }[]>;
-    findOne(Id: string): Promise<{
-        Id: string;
-        disciplineId: string;
-        termId: string;
-        definitionId: string;
+    findOne(id: number): Promise<{
+        id: number;
+        termId: number;
+        disciplineId: number;
+        definitionId: number;
     }>;
-    getTermsByDisciplineId(disciplineId: string): Promise<{
-        id: string;
+    getTermsByDisciplineId(disciplineId: number): Promise<{
+        id: number;
         name: string;
     }[]>;
     create(data: {
-        termId: string;
-        definitionId: string;
-        disciplineId: string;
+        termId: number;
+        definitionId: number;
+        disciplineId: number;
     }): Promise<{
-        Id: string;
-        disciplineId: string;
-        termId: string;
-        definitionId: string;
+        id: number;
+        termId: number;
+        disciplineId: number;
+        definitionId: number;
     }>;
-    update(Id: string, data: {
-        termId?: string;
-        definitionId?: string;
-        disciplineId?: string;
+    update(id: number, data: {
+        termId?: number;
+        definitionId?: number;
+        disciplineId?: number;
     }): Promise<{
-        Id: string;
-        disciplineId: string;
-        termId: string;
-        definitionId: string;
+        id: number;
+        termId: number;
+        disciplineId: number;
+        definitionId: number;
     }>;
-    remove(Id: string): Promise<{
-        Id: string;
-        disciplineId: string;
-        termId: string;
-        definitionId: string;
+    remove(id: number): Promise<{
+        id: number;
+        termId: number;
+        disciplineId: number;
+        definitionId: number;
     }>;
-    removeTerm(termId: string): Promise<import(".prisma/client").Prisma.BatchPayload>;
+    removeTerm(termId: number): Promise<import(".prisma/client").Prisma.BatchPayload>;
 }

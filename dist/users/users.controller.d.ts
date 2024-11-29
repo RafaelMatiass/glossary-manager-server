@@ -3,36 +3,41 @@ export declare class UsersController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        prontuario: string;
-        name: string;
-        password: string;
+        id: number;
+        nome: string;
+        email: string;
+        senha: string;
     }[]>;
-    findOne(prontuario: string): Promise<{
-        prontuario: string;
-        name: string;
-        password: string;
+    findOne(id: number): Promise<{
+        id: number;
+        nome: string;
+        email: string;
+        senha: string;
     }>;
     create(data: {
-        prontuario: string;
-        name: string;
-        password: string;
+        nome: string;
+        email: string;
+        senha: string;
     }): Promise<{
-        prontuario: string;
-        name: string;
-        password: string;
+        id: number;
+        nome: string;
+        email: string;
+        senha: string;
     }>;
-    update(prontuario: string, data: {
-        prontuario?: string;
-        name?: string;
-        password?: string;
+    update(id: number, data: {
+        nome?: string;
+        email?: string;
+        senha?: string;
     }): Promise<{
-        prontuario: string;
-        name: string;
-        password: string;
+        id: number;
+        nome: string;
+        email: string;
+        senha: string;
     }>;
-    remove(prontuario: string): Promise<{
-        prontuario: string;
-        name: string;
-        password: string;
+    remove(id: number): Promise<{
+        id: number;
+        nome: string;
+        email: string;
+        senha: string;
     }>;
 }

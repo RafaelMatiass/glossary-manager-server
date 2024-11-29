@@ -3,27 +3,27 @@ export declare class AuthorController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        authorId: string;
+        id: number;
         name: string;
     }[]>;
-    findOne(authorId: string): Promise<{
-        authorId: string;
+    findOne(authorId: number): Promise<{
+        id: number;
         name: string;
     }>;
     create(data: {
         name: string;
     }): Promise<{
-        authorId: string;
+        id: number;
         name: string;
     }>;
-    update(authorId: string, data: {
+    update(authorId: number, data: {
         name?: string;
     }): Promise<{
-        authorId: string;
+        id: number;
         name: string;
     }>;
-    remove(authorId: string): Promise<{
-        authorId: string;
+    remove(authorId: number): Promise<{
+        id: number;
         name: string;
     }>;
 }

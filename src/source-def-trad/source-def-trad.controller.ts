@@ -19,8 +19,8 @@ export class SourceDefTradController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') sourceId: string) {
-    return this.prisma.source.findUnique({ where: { sourceId } });
+  async findOne(@Param('id') sourceId: number) {  // Alterado para 'number'
+    return this.prisma.source.findUnique({ where: { id: sourceId } });
   }
 
   @Post()
@@ -30,7 +30,7 @@ export class SourceDefTradController {
       title: string;
       publisher: string;
       type_publication: string;
-      year: string;
+      year: number;  // Alterado para 'number'
     },
   ) {
     return await this.prisma.source.create({ data });
@@ -38,20 +38,20 @@ export class SourceDefTradController {
 
   @Put(':id')
   async update(
-    @Param('id') sourceId: string,
+    @Param('id') sourceId: number,  // Alterado para 'number'
     @Body()
     data: {
       title?: string;
       publisher?: string;
       type_publication?: string;
-      year?: string;
+      year?: number;  // Alterado para 'number'
     },
   ) {
-    return this.prisma.source.update({ where: { sourceId }, data });
+    return this.prisma.source.update({ where: { id: sourceId }, data });
   }
 
   @Delete(':id')
-  async remove(@Param('id') sourceId: string) {
-    return this.prisma.source.delete({ where: { sourceId } });
+  async remove(@Param('id') sourceId: number) {  // Alterado para 'number'
+    return this.prisma.source.delete({ where: { id: sourceId } });
   }
 }

@@ -19,33 +19,33 @@ export class SourceAuthorshipController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') Id: string) {
-    return this.prisma.source_Authorship.findUnique({ where: { Id } });
+  async findOne(@Param('id') id: number) {  // Alterado para 'number'
+    return this.prisma.source_Authorship.findUnique({ where: { id } });
   }
 
   @Get('/source/:sourceId')
-  async findBySourceId(@Param('sourceId') sourceId: string) {
+  async findBySourceId(@Param('sourceId') sourceId: number) {  // Alterado para 'number'
     const sourceAuthorship = await this.prisma.source_Authorship.findFirst({
       where: {
         sourceId: sourceId,
       },
       select: {
-        Id: true,
+        id: true,
       },
     });
 
     if (!sourceAuthorship) {
       throw new Error('Id não encontrado');
     }
-    return sourceAuthorship.Id;
+    return sourceAuthorship.id;
   }
 
   @Post()
   async create(
     @Body()
     data: {
-      sourceId: string;
-      authorId: string;
+      sourceId: number;  // Alterado para 'number'
+      authorId: number;  // Alterado para 'number'
     },
   ) {
     return await this.prisma.source_Authorship.create({ data });
@@ -53,23 +53,23 @@ export class SourceAuthorshipController {
 
   @Put(':id')
   async update(
-    @Param('id') Id: string,
+    @Param('id') id: number,  // Alterado para 'number'
     @Body()
     data: {
-      sourceId?: string;
-      authorId?: string;
+      sourceId?: number;  // Alterado para 'number'
+      authorId?: number;  // Alterado para 'number'
     },
   ) {
-    return this.prisma.source_Authorship.update({ where: { Id }, data });
+    return this.prisma.source_Authorship.update({ where: { id }, data });
   }
 
   @Delete(':id')
-  async remove(@Param('id') Id: string) {
-    return this.prisma.source_Authorship.delete({ where: { Id } });
+  async remove(@Param('id') id: number) {  // Alterado para 'number'
+    return this.prisma.source_Authorship.delete({ where: { id } });
   }
 
   @Delete('/sourceId/:sourceId')
-  async removeSource(@Param('sourceId') sourceId: string) {
+  async removeSource(@Param('sourceId') sourceId: number) {  // Alterado para 'number'
     try {
       const sources = await this.prisma.source_Authorship.findMany({
         where: { sourceId: sourceId },
@@ -79,12 +79,12 @@ export class SourceAuthorshipController {
         throw new Error('Nenhuma entrada encontrada');
       }
 
-      const sourceIds = sources.map((source) => source.Id);
+      const sourceIds = sources.map((source) => source.id);
       
       const deleteResult =
         await this.prisma.source_Authorship.deleteMany({
           where: {
-            Id: {
+            id: {
               in: sourceIds,
             },
           },

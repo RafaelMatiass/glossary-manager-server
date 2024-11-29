@@ -22,17 +22,17 @@ let UsersController = exports.UsersController = class UsersController {
     async findAll() {
         return this.prisma.users.findMany();
     }
-    async findOne(prontuario) {
-        return this.prisma.users.findUnique({ where: { prontuario } });
+    async findOne(id) {
+        return this.prisma.users.findUnique({ where: { id } });
     }
     async create(data) {
         return this.prisma.users.create({ data });
     }
-    async update(prontuario, data) {
-        return this.prisma.users.update({ where: { prontuario }, data });
+    async update(id, data) {
+        return this.prisma.users.update({ where: { id }, data });
     }
-    async remove(prontuario) {
-        return this.prisma.users.delete({ where: { prontuario } });
+    async remove(id) {
+        return this.prisma.users.delete({ where: { id } });
     }
 };
 __decorate([
@@ -45,7 +45,7 @@ __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "findOne", null);
 __decorate([
@@ -56,18 +56,18 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "create", null);
 __decorate([
-    (0, common_1.Put)(':prontuario'),
-    __param(0, (0, common_1.Param)('prontuario')),
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':prontuario'),
-    __param(0, (0, common_1.Param)('prontuario')),
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "remove", null);
 exports.UsersController = UsersController = __decorate([

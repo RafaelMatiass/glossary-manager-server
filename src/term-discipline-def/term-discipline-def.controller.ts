@@ -19,31 +19,31 @@ export class TermDisciplineDefController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') Id: string) {
-    return this.prisma.term_Discipline_Definition.findUnique({ where: { Id } });
+  async findOne(@Param('id') id: number) {  
+    return this.prisma.term_Discipline_Definition.findUnique({ where: { id } });
   }
 
   @Get('/terms/:disciplineId')
-  async getTermsByDisciplineId(@Param('disciplineId') disciplineId: string) {
+  async getTermsByDisciplineId(@Param('disciplineId') disciplineId: number) {
     const terms = await this.prisma.term_Discipline_Definition.findMany({
       where: {
         disciplineId,
       },
       include: {
-        term: true,
+        Term: true,
       },
     });
 
-    return terms.map((termDiscipline) => termDiscipline.term);
+    return terms.map((termDiscipline) => termDiscipline.Term);  // verificar funcionamento
   }
 
   @Post()
   async create(
     @Body()
     data: {
-      termId: string;
-      definitionId: string;
-      disciplineId: string;
+      termId: number;
+      definitionId: number;
+      disciplineId: number;
     },
   ) {
     return this.prisma.term_Discipline_Definition.create({ data });
@@ -51,27 +51,27 @@ export class TermDisciplineDefController {
 
   @Put(':id')
   async update(
-    @Param('id') Id: string,
+    @Param('id') id: number,  // Alterado para 'number'
     @Body()
     data: {
-      termId?: string;
-      definitionId?: string;
-      disciplineId?: string;
+      termId?: number;
+      definitionId?: number;
+      disciplineId?: number;
     },
   ) {
     return this.prisma.term_Discipline_Definition.update({
-      where: { Id },
+      where: { id },
       data,
     });
   }
 
   @Delete(':id')
-  async remove(@Param('id') Id: string) {
-    return this.prisma.term_Discipline_Definition.delete({ where: { Id } });
+  async remove(@Param('id') id: number) {  // Alterado para 'number'
+    return this.prisma.term_Discipline_Definition.delete({ where: { id } });
   }
 
   @Delete('/termId/:termId')
-  async removeTerm(@Param('termId') termId: string) {
+  async removeTerm(@Param('termId') termId: number) {
     try {
       const terms = await this.prisma.term_Discipline_Definition.findMany({
         where: { termId: termId },
@@ -81,12 +81,12 @@ export class TermDisciplineDefController {
         throw new Error('Nenhuma entrada encontrada');
       }
 
-      const termIds = terms.map((term) => term.Id);
+      const termIds = terms.map((term) => term.id);
       
       const deleteResult =
         await this.prisma.term_Discipline_Definition.deleteMany({
           where: {
-            Id: {
+            id: {
               in: termIds,
             },
           },

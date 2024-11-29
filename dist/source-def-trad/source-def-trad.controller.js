@@ -23,16 +23,16 @@ let SourceDefTradController = exports.SourceDefTradController = class SourceDefT
         return this.prisma.source.findMany();
     }
     async findOne(sourceId) {
-        return this.prisma.source.findUnique({ where: { sourceId } });
+        return this.prisma.source.findUnique({ where: { id: sourceId } });
     }
     async create(data) {
         return await this.prisma.source.create({ data });
     }
     async update(sourceId, data) {
-        return this.prisma.source.update({ where: { sourceId }, data });
+        return this.prisma.source.update({ where: { id: sourceId }, data });
     }
     async remove(sourceId) {
-        return this.prisma.source.delete({ where: { sourceId } });
+        return this.prisma.source.delete({ where: { id: sourceId } });
     }
 };
 __decorate([
@@ -45,7 +45,7 @@ __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], SourceDefTradController.prototype, "findOne", null);
 __decorate([
@@ -60,14 +60,14 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], SourceDefTradController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], SourceDefTradController.prototype, "remove", null);
 exports.SourceDefTradController = SourceDefTradController = __decorate([

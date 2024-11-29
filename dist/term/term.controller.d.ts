@@ -3,31 +3,31 @@ export declare class TermController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        id: string;
+        id: number;
         name: string;
     }[]>;
-    findOne(id: string): Promise<{
-        id: string;
+    findOne(id: number): Promise<{
+        id: number;
         name: string;
     }>;
     findByName(name: string): Promise<{
-        id: string;
+        id: number;
         name: string;
     }>;
     create(data: {
         name: string;
     }): Promise<{
-        id: string;
+        id: number;
         name: string;
     }>;
-    update(id: string, data: {
+    update(id: number, data: {
         name?: string;
     }): Promise<{
-        id: string;
+        id: number;
         name: string;
     }>;
-    remove(id: string): Promise<{
-        id: string;
+    remove(id: number): Promise<{
+        id: number;
         name: string;
     }>;
 }

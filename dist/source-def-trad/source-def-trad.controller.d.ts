@@ -3,48 +3,48 @@ export declare class SourceDefTradController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        sourceId: string;
+        id: number;
         title: string;
         publisher: string;
-        year: string;
-        type_publication: string;
+        year: number;
+        publicationType: string;
     }[]>;
-    findOne(sourceId: string): Promise<{
-        sourceId: string;
+    findOne(sourceId: number): Promise<{
+        id: number;
         title: string;
         publisher: string;
-        year: string;
-        type_publication: string;
+        year: number;
+        publicationType: string;
     }>;
     create(data: {
         title: string;
         publisher: string;
         type_publication: string;
-        year: string;
+        year: number;
     }): Promise<{
-        sourceId: string;
+        id: number;
         title: string;
         publisher: string;
-        year: string;
-        type_publication: string;
+        year: number;
+        publicationType: string;
     }>;
-    update(sourceId: string, data: {
+    update(sourceId: number, data: {
         title?: string;
         publisher?: string;
         type_publication?: string;
-        year?: string;
+        year?: number;
     }): Promise<{
-        sourceId: string;
+        id: number;
         title: string;
         publisher: string;
-        year: string;
-        type_publication: string;
+        year: number;
+        publicationType: string;
     }>;
-    remove(sourceId: string): Promise<{
-        sourceId: string;
+    remove(sourceId: number): Promise<{
+        id: number;
         title: string;
         publisher: string;
-        year: string;
-        type_publication: string;
+        year: number;
+        publicationType: string;
     }>;
 }

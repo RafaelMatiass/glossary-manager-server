@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -17,15 +18,24 @@ export class DisciplineController {
   async findAll() {
     return this.prisma.discipline.findMany();
   }
-  // Trazer todas as diciplinas de um curso ou glossário específico(Informática, Mecanica)
+  // Trazer todas as disciplinas de um curso ou glossário específico (Informática, Mecânica)
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return this.prisma.discipline.findUnique({ where: { id } });
+  async findOne(@Param('id') id: string) { 
+    const numericId = parseInt(id, 10); // Converter o id para número
+    if (isNaN(numericId)) {
+      throw new BadRequestException('O ID fornecido não é um número válido.');
+    }
+
+    return this.prisma.discipline.findUnique({
+      where: {
+        id: numericId, 
+      },
+    });
   }
 
   @Get('/glossary/:glossaryId')
-  async findByGlossaryId(@Param('glossaryId') glossaryId: string) {
+  async findByGlossaryId(@Param('glossaryId') glossaryId: number) {  // Alterado para 'number'
     const glossary = await this.prisma.glossary.findUnique({
       where: { id: glossaryId },
       include: {
@@ -46,8 +56,8 @@ export class DisciplineController {
     data: {
       name: string;
       description: string;
-      year: string;
-      glossaryId: string;
+      year: number;  // Alterado para 'number'
+      glossaryId: number;  // Alterado para 'number'
     },
   ) {
     return this.prisma.discipline.create({ data });
@@ -55,20 +65,20 @@ export class DisciplineController {
 
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,  // Alterado para 'number'
     @Body()
     data: {
       name?: string;
       description?: string;
-      year?: string;
-      glossaryId?: string;
+      year?: number;  // Alterado para 'number'
+      glossaryId?: number;  // Alterado para 'number'
     },
   ) {
     return this.prisma.discipline.update({ where: { id }, data });
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {  // Alterado para 'number'
     return this.prisma.discipline.delete({ where: { id } });
   }
 }

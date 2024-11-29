@@ -22,8 +22,8 @@ let TermDisciplineDefController = exports.TermDisciplineDefController = class Te
     async findAll() {
         return this.prisma.term_Discipline_Definition.findMany();
     }
-    async findOne(Id) {
-        return this.prisma.term_Discipline_Definition.findUnique({ where: { Id } });
+    async findOne(id) {
+        return this.prisma.term_Discipline_Definition.findUnique({ where: { id } });
     }
     async getTermsByDisciplineId(disciplineId) {
         const terms = await this.prisma.term_Discipline_Definition.findMany({
@@ -31,22 +31,22 @@ let TermDisciplineDefController = exports.TermDisciplineDefController = class Te
                 disciplineId,
             },
             include: {
-                term: true,
+                Term: true,
             },
         });
-        return terms.map((termDiscipline) => termDiscipline.term);
+        return terms.map((termDiscipline) => termDiscipline.Term);
     }
     async create(data) {
         return this.prisma.term_Discipline_Definition.create({ data });
     }
-    async update(Id, data) {
+    async update(id, data) {
         return this.prisma.term_Discipline_Definition.update({
-            where: { Id },
+            where: { id },
             data,
         });
     }
-    async remove(Id) {
-        return this.prisma.term_Discipline_Definition.delete({ where: { Id } });
+    async remove(id) {
+        return this.prisma.term_Discipline_Definition.delete({ where: { id } });
     }
     async removeTerm(termId) {
         try {
@@ -56,10 +56,10 @@ let TermDisciplineDefController = exports.TermDisciplineDefController = class Te
             if (terms.length === 0) {
                 throw new Error('Nenhuma entrada encontrada');
             }
-            const termIds = terms.map((term) => term.Id);
+            const termIds = terms.map((term) => term.id);
             const deleteResult = await this.prisma.term_Discipline_Definition.deleteMany({
                 where: {
-                    Id: {
+                    id: {
                         in: termIds,
                     },
                 },
@@ -81,14 +81,14 @@ __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TermDisciplineDefController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Get)('/terms/:disciplineId'),
     __param(0, (0, common_1.Param)('disciplineId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TermDisciplineDefController.prototype, "getTermsByDisciplineId", null);
 __decorate([
@@ -103,21 +103,21 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], TermDisciplineDefController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TermDisciplineDefController.prototype, "remove", null);
 __decorate([
     (0, common_1.Delete)('/termId/:termId'),
     __param(0, (0, common_1.Param)('termId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TermDisciplineDefController.prototype, "removeTerm", null);
 exports.TermDisciplineDefController = TermDisciplineDefController = __decorate([

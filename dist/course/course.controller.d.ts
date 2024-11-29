@@ -3,12 +3,12 @@ export declare class CourseController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        id: string;
+        id: number;
         name: string;
         description: string;
     }[]>;
-    findOne(id: string): Promise<{
-        id: string;
+    findOne(id: number): Promise<{
+        id: number;
         name: string;
         description: string;
     }>;
@@ -16,20 +16,20 @@ export declare class CourseController {
         name: string;
         description: string;
     }): Promise<{
-        id: string;
+        id: number;
         name: string;
         description: string;
     }>;
-    update(id: string, data: {
+    update(id: number, data: {
         name?: string;
         description?: string;
     }): Promise<{
-        id: string;
+        id: number;
         name: string;
         description: string;
     }>;
-    remove(id: string): Promise<{
-        id: string;
+    remove(id: number): Promise<{
+        id: number;
         name: string;
         description: string;
     }>;

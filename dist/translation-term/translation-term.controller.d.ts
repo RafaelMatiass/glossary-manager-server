@@ -3,67 +3,67 @@ export declare class TranslationTermController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        translationId: string;
-        termId: string;
-        sourceId: string;
+        id: number;
         language: string;
         translation: string;
         page: string;
+        termId: number;
+        sourceId: number;
     }[]>;
-    findOne(translationId: string): Promise<{
-        translationId: string;
-        termId: string;
-        sourceId: string;
+    findOne(id: number): Promise<{
+        id: number;
         language: string;
         translation: string;
         page: string;
+        termId: number;
+        sourceId: number;
     }>;
-    getByTermId(termId: string): Promise<{
-        translationId: string;
-        termId: string;
-        sourceId: string;
+    getByTermId(termId: number): Promise<{
+        id: number;
         language: string;
         translation: string;
         page: string;
+        termId: number;
+        sourceId: number;
     }[]>;
     create(data: {
         language: string;
         page: string;
         translation: string;
-        sourceId: string;
-        termId: string;
+        sourceId: number;
+        termId: number;
     }): Promise<{
-        translationId: string;
-        termId: string;
-        sourceId: string;
+        id: number;
         language: string;
         translation: string;
         page: string;
+        termId: number;
+        sourceId: number;
     }>;
-    update(translationId: string, data: {
+    update(id: number, data: {
         language?: string;
         page?: string;
         translation?: string;
-        sourceId?: string;
-        termId?: string;
+        sourceId?: number;
+        termId?: number;
     }): Promise<{
-        translationId: string;
-        termId: string;
-        sourceId: string;
+        id: number;
         language: string;
         translation: string;
         page: string;
+        termId: number;
+        sourceId: number;
     }>;
-    removeTerm(termId: string): Promise<{
+    removeTerm(termId: number): Promise<{
         success: boolean;
         message: any;
     }>;
-    remove(translationId: string): Promise<{
-        translationId: string;
-        termId: string;
-        sourceId: string;
+    remove(id: number): Promise<{
+        id: number;
         language: string;
         translation: string;
         page: string;
+        termId: number;
+        sourceId: number;
     }>;
 }

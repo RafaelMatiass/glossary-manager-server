@@ -22,8 +22,8 @@ let SourceAuthorshipController = exports.SourceAuthorshipController = class Sour
     async findAll() {
         return this.prisma.source_Authorship.findMany();
     }
-    async findOne(Id) {
-        return this.prisma.source_Authorship.findUnique({ where: { Id } });
+    async findOne(id) {
+        return this.prisma.source_Authorship.findUnique({ where: { id } });
     }
     async findBySourceId(sourceId) {
         const sourceAuthorship = await this.prisma.source_Authorship.findFirst({
@@ -31,22 +31,44 @@ let SourceAuthorshipController = exports.SourceAuthorshipController = class Sour
                 sourceId: sourceId,
             },
             select: {
-                Id: true,
+                id: true,
             },
         });
         if (!sourceAuthorship) {
             throw new Error('Id não encontrado');
         }
-        return sourceAuthorship.Id;
+        return sourceAuthorship.id;
     }
     async create(data) {
         return await this.prisma.source_Authorship.create({ data });
     }
-    async update(Id, data) {
-        return this.prisma.source_Authorship.update({ where: { Id }, data });
+    async update(id, data) {
+        return this.prisma.source_Authorship.update({ where: { id }, data });
     }
-    async remove(Id) {
-        return this.prisma.source_Authorship.delete({ where: { Id } });
+    async remove(id) {
+        return this.prisma.source_Authorship.delete({ where: { id } });
+    }
+    async removeSource(sourceId) {
+        try {
+            const sources = await this.prisma.source_Authorship.findMany({
+                where: { sourceId: sourceId },
+            });
+            if (sources.length === 0) {
+                throw new Error('Nenhuma entrada encontrada');
+            }
+            const sourceIds = sources.map((source) => source.id);
+            const deleteResult = await this.prisma.source_Authorship.deleteMany({
+                where: {
+                    id: {
+                        in: sourceIds,
+                    },
+                },
+            });
+            return deleteResult;
+        }
+        catch (error) {
+            throw new Error(`Erro ao excluir termo do terciário: ${error.message}`);
+        }
     }
 };
 __decorate([
@@ -59,14 +81,14 @@ __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], SourceAuthorshipController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Get)('/source/:sourceId'),
     __param(0, (0, common_1.Param)('sourceId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], SourceAuthorshipController.prototype, "findBySourceId", null);
 __decorate([
@@ -81,16 +103,23 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], SourceAuthorshipController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], SourceAuthorshipController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Delete)('/sourceId/:sourceId'),
+    __param(0, (0, common_1.Param)('sourceId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], SourceAuthorshipController.prototype, "removeSource", null);
 exports.SourceAuthorshipController = SourceAuthorshipController = __decorate([
     (0, common_1.Controller)('source-authorship'),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])

@@ -3,41 +3,41 @@ export declare class DefinitionController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        id: string;
-        sourceId: string;
+        id: number;
         description: string;
         page: string;
+        sourceId: number;
     }[]>;
-    findOne(id: string): Promise<{
-        id: string;
-        sourceId: string;
+    findOne(id: number): Promise<{
+        id: number;
         description: string;
         page: string;
+        sourceId: number;
     }>;
     create(data: {
         definitionDescription: string;
         page: string;
-        sourceId: string;
+        sourceId: number;
     }): Promise<{
-        id: string;
-        sourceId: string;
+        id: number;
         description: string;
         page: string;
+        sourceId: number;
     }>;
-    update(id: string, data: {
+    update(id: number, data: {
         definitionDescription?: string;
-        termId?: string;
-        sourceId?: string;
+        termId?: number;
+        sourceId?: number;
     }): Promise<{
-        id: string;
-        sourceId: string;
+        id: number;
         description: string;
         page: string;
+        sourceId: number;
     }>;
-    remove(id: string): Promise<{
-        id: string;
-        sourceId: string;
+    remove(id: number): Promise<{
+        id: number;
         description: string;
         page: string;
+        sourceId: number;
     }>;
 }

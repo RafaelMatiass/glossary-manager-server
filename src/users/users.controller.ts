@@ -19,37 +19,37 @@ export class UsersController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') prontuario: string) {
-    return this.prisma.users.findUnique({ where: { prontuario } });
+  async findOne(@Param('id') id: number) {  // Alterado para 'id' do tipo 'number'
+    return this.prisma.users.findUnique({ where: { id } });
   }
 
   @Post()
   async create(
     @Body()
     data: {
-      prontuario: string;
-      name: string;
-      password: string;
+      nome: string;
+      email: string;
+      senha: string;
     },
   ) {
     return this.prisma.users.create({ data });
   }
 
-  @Put(':prontuario')
+  @Put(':id')
   async update(
-    @Param('prontuario') prontuario: string,
+    @Param('id') id: number,  // Alterado para 'id' do tipo 'number'
     @Body()
     data: {
-      prontuario?: string;
-      name?: string;
-      password?: string;
+      nome?: string;
+      email?: string;
+      senha?: string;
     },
   ) {
-    return this.prisma.users.update({ where: { prontuario }, data });
+    return this.prisma.users.update({ where: { id }, data });
   }
 
-  @Delete(':prontuario')
-  async remove(@Param('prontuario') prontuario: string) {
-    return this.prisma.users.delete({ where: { prontuario } });
+  @Delete(':id')
+  async remove(@Param('id') id: number) {  
+    return this.prisma.users.delete({ where: { id } });
   }
 }

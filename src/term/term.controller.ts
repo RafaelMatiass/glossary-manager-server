@@ -9,10 +9,6 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
 
-// Definition
-// Id, Idterm, textodefinition
-// Id da fonte bibliografica
-
 @Controller('term')
 export class TermController {
   constructor(private readonly prisma: PrismaService) {}
@@ -23,7 +19,7 @@ export class TermController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {  // Alterado para 'number'
     return this.prisma.term.findUnique({ where: { id } });
   }
 
@@ -48,7 +44,7 @@ export class TermController {
 
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,  // Alterado para 'number'
     @Body()
     data: {
       name?: string;
@@ -58,7 +54,7 @@ export class TermController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {  // Alterado para 'number'
     return this.prisma.term.delete({ where: { id } });
   }
 }

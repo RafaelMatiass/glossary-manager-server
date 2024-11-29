@@ -22,8 +22,8 @@ let TranslationTermController = exports.TranslationTermController = class Transl
     async findAll() {
         return this.prisma.translation.findMany();
     }
-    async findOne(translationId) {
-        return this.prisma.translation.findUnique({ where: { translationId } });
+    async findOne(id) {
+        return this.prisma.translation.findUnique({ where: { id } });
     }
     async getByTermId(termId) {
         return this.prisma.translation.findMany({
@@ -35,8 +35,8 @@ let TranslationTermController = exports.TranslationTermController = class Transl
     async create(data) {
         return this.prisma.translation.create({ data });
     }
-    async update(translationId, data) {
-        return this.prisma.translation.update({ where: { translationId }, data });
+    async update(id, data) {
+        return this.prisma.translation.update({ where: { id }, data });
     }
     async removeTerm(termId) {
         try {
@@ -62,8 +62,8 @@ let TranslationTermController = exports.TranslationTermController = class Transl
             return { success: false, message: error.message };
         }
     }
-    async remove(translationId) {
-        return this.prisma.translation.delete({ where: { translationId } });
+    async remove(id) {
+        return this.prisma.translation.delete({ where: { id } });
     }
 };
 __decorate([
@@ -76,14 +76,14 @@ __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TranslationTermController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Get)('translationByTermId/:termId'),
     __param(0, (0, common_1.Param)('termId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TranslationTermController.prototype, "getByTermId", null);
 __decorate([
@@ -98,21 +98,21 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], TranslationTermController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)('/termId/:termId'),
     __param(0, (0, common_1.Param)('termId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TranslationTermController.prototype, "removeTerm", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], TranslationTermController.prototype, "remove", null);
 exports.TranslationTermController = TranslationTermController = __decorate([

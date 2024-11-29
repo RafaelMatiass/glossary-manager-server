@@ -3,55 +3,55 @@ export declare class DisciplineController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        id: string;
-        glossaryId: string;
+        id: number;
         name: string;
+        year: number;
         description: string;
-        year: string;
+        glossaryId: number;
     }[]>;
     findOne(id: string): Promise<{
-        id: string;
-        glossaryId: string;
+        id: number;
         name: string;
+        year: number;
         description: string;
-        year: string;
+        glossaryId: number;
     }>;
-    findByGlossaryId(glossaryId: string): Promise<{
-        id: string;
-        glossaryId: string;
+    findByGlossaryId(glossaryId: number): Promise<{
+        id: number;
         name: string;
+        year: number;
         description: string;
-        year: string;
+        glossaryId: number;
     }[]>;
     create(data: {
         name: string;
         description: string;
-        year: string;
-        glossaryId: string;
+        year: number;
+        glossaryId: number;
     }): Promise<{
-        id: string;
-        glossaryId: string;
+        id: number;
         name: string;
+        year: number;
         description: string;
-        year: string;
+        glossaryId: number;
     }>;
-    update(id: string, data: {
+    update(id: number, data: {
         name?: string;
         description?: string;
-        year?: string;
-        glossaryId?: string;
+        year?: number;
+        glossaryId?: number;
     }): Promise<{
-        id: string;
-        glossaryId: string;
+        id: number;
         name: string;
+        year: number;
         description: string;
-        year: string;
+        glossaryId: number;
     }>;
-    remove(id: string): Promise<{
-        id: string;
-        glossaryId: string;
+    remove(id: number): Promise<{
+        id: number;
         name: string;
+        year: number;
         description: string;
-        year: string;
+        glossaryId: number;
     }>;
 }

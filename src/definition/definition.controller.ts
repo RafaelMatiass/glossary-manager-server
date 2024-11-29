@@ -19,7 +19,7 @@ export class DefinitionController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {  // Alterado para 'number'
     return this.prisma.definition.findUnique({ where: { id } });
   }
 
@@ -29,7 +29,7 @@ export class DefinitionController {
     data: {
       definitionDescription: string;
       page: string;
-      sourceId: string;
+      sourceId: number;  // Alterado para 'number'
     },
   ) {
     return this.prisma.definition.create({ data });
@@ -37,19 +37,19 @@ export class DefinitionController {
 
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,  // Alterado para 'number'
     @Body()
     data: {
       definitionDescription?: string;
-      termId?: string;
-      sourceId?: string;
+      termId?: number;  // Alterado para 'number'
+      sourceId?: number;  // Alterado para 'number'
     },
   ) {
     return this.prisma.definition.update({ where: { id }, data });
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {  // Alterado para 'number'
     return this.prisma.definition.delete({ where: { id } });
   }
 }

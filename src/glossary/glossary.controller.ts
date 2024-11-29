@@ -19,32 +19,32 @@ export class GlossaryController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {  // Alterado para 'number'
     return this.prisma.glossary.findUnique({ where: { id } });
   }
 
   @Post()
   async create(
-    @Body() data: { name: string; description: string; courseId: string },
+    @Body() data: { name: string; description: string; courseId: number },  // Alterado para 'number'
   ) {
     return this.prisma.glossary.create({ data });
   }
 
   @Put(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,  // Alterado para 'number'
     @Body()
     data: {
       name?: string;
       description?: string;
-      courseId?: string;
+      courseId?: number;  // Alterado para 'number'
     },
   ) {
     return this.prisma.glossary.update({ where: { id }, data });
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {  // Alterado para 'number'
     return this.prisma.glossary.delete({ where: { id } });
   }
 }

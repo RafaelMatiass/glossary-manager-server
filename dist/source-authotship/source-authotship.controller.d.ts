@@ -3,35 +3,36 @@ export declare class SourceAuthorshipController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        Id: string;
-        sourceId: string;
-        authorId: string;
+        id: number;
+        sourceId: number;
+        authorId: number;
     }[]>;
-    findOne(Id: string): Promise<{
-        Id: string;
-        sourceId: string;
-        authorId: string;
+    findOne(id: number): Promise<{
+        id: number;
+        sourceId: number;
+        authorId: number;
     }>;
-    findBySourceId(sourceId: string): Promise<string>;
+    findBySourceId(sourceId: number): Promise<number>;
     create(data: {
-        sourceId: string;
-        authorId: string;
+        sourceId: number;
+        authorId: number;
     }): Promise<{
-        Id: string;
-        sourceId: string;
-        authorId: string;
+        id: number;
+        sourceId: number;
+        authorId: number;
     }>;
-    update(Id: string, data: {
-        sourceId?: string;
-        authorId?: string;
+    update(id: number, data: {
+        sourceId?: number;
+        authorId?: number;
     }): Promise<{
-        Id: string;
-        sourceId: string;
-        authorId: string;
+        id: number;
+        sourceId: number;
+        authorId: number;
     }>;
-    remove(Id: string): Promise<{
-        Id: string;
-        sourceId: string;
-        authorId: string;
+    remove(id: number): Promise<{
+        id: number;
+        sourceId: number;
+        authorId: number;
     }>;
+    removeSource(sourceId: number): Promise<import(".prisma/client").Prisma.BatchPayload>;
 }

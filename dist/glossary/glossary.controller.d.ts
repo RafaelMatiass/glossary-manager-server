@@ -3,41 +3,41 @@ export declare class GlossaryController {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        id: string;
-        courseId: string;
+        id: number;
         name: string;
         description: string;
+        courseId: number;
     }[]>;
-    findOne(id: string): Promise<{
-        id: string;
-        courseId: string;
+    findOne(id: number): Promise<{
+        id: number;
         name: string;
         description: string;
+        courseId: number;
     }>;
     create(data: {
         name: string;
         description: string;
-        courseId: string;
+        courseId: number;
     }): Promise<{
-        id: string;
-        courseId: string;
+        id: number;
         name: string;
         description: string;
+        courseId: number;
     }>;
-    update(id: string, data: {
+    update(id: number, data: {
         name?: string;
         description?: string;
-        courseId?: string;
+        courseId?: number;
     }): Promise<{
-        id: string;
-        courseId: string;
+        id: number;
         name: string;
         description: string;
+        courseId: number;
     }>;
-    remove(id: string): Promise<{
-        id: string;
-        courseId: string;
+    remove(id: number): Promise<{
+        id: number;
         name: string;
         description: string;
+        courseId: number;
     }>;
 }

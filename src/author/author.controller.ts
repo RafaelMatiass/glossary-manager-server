@@ -19,8 +19,8 @@ export class AuthorController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') authorId: string) {
-    return this.prisma.author.findUnique({ where: { authorId } });
+  async findOne(@Param('id') authorId: number) {  // Alterado para 'number'
+    return this.prisma.author.findUnique({ where: { id: authorId } });  // Alterado para 'id'
   }
 
   @Post()
@@ -35,17 +35,17 @@ export class AuthorController {
 
   @Put(':id')
   async update(
-    @Param('id') authorId: string,
+    @Param('id') authorId: number,  // Alterado para 'number'
     @Body()
     data: {
       name?: string;
     },
   ) {
-    return this.prisma.author.update({ where: { authorId }, data });
+    return this.prisma.author.update({ where: { id: authorId }, data });  // 
   }
 
   @Delete(':id')
-  async remove(@Param('id') authorId: string) {
-    return this.prisma.author.delete({ where: { authorId } });
+  async remove(@Param('id') authorId: number) { 
+    return this.prisma.author.delete({ where: { id: authorId } });  // Alterado para 'id'
   }
 }

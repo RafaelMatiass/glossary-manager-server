@@ -19,12 +19,12 @@ export class TranslationTermController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') translationId: string) {
-    return this.prisma.translation.findUnique({ where: { translationId } });
+  async findOne(@Param('id') id: number) {  // Alterado para 'number'
+    return this.prisma.translation.findUnique({ where: { id } });
   }
 
   @Get('translationByTermId/:termId')
-  async getByTermId(@Param('termId') termId: string) {
+  async getByTermId(@Param('termId') termId: number) {
     return this.prisma.translation.findMany({
       where: {
         termId: termId,
@@ -39,8 +39,8 @@ export class TranslationTermController {
       language: string;
       page: string;
       translation: string;
-      sourceId: string;
-      termId: string;
+      sourceId: number;
+      termId: number;
     },
   ) {
     return this.prisma.translation.create({ data });
@@ -48,21 +48,21 @@ export class TranslationTermController {
 
   @Put(':id')
   async update(
-    @Param('id') translationId: string,
+    @Param('id') id: number,  
     @Body()
     data: {
       language?: string;
       page?: string;
       translation?: string;
-      sourceId?: string;
-      termId?: string;
+      sourceId?: number;
+      termId?: number;
     },
   ) {
-    return this.prisma.translation.update({ where: { translationId }, data });
+    return this.prisma.translation.update({ where: { id }, data });
   }
 
   @Delete('/termId/:termId')
-  async removeTerm(@Param('termId') termId: string) {
+  async removeTerm(@Param('termId') termId: number) {
     try {
       const term = await this.prisma.term.findUnique({
         where: { id: termId },
@@ -91,7 +91,7 @@ export class TranslationTermController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') translationId: string) {
-    return this.prisma.translation.delete({ where: { translationId } });
+  async remove(@Param('id') id: number) {  // Alterado para 'number'
+    return this.prisma.translation.delete({ where: { id } });
   }
 }

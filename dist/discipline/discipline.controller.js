@@ -23,7 +23,15 @@ let DisciplineController = exports.DisciplineController = class DisciplineContro
         return this.prisma.discipline.findMany();
     }
     async findOne(id) {
-        return this.prisma.discipline.findUnique({ where: { id } });
+        const numericId = parseInt(id, 10);
+        if (isNaN(numericId)) {
+            throw new common_1.BadRequestException('O ID fornecido não é um número válido.');
+        }
+        return this.prisma.discipline.findUnique({
+            where: {
+                id: numericId,
+            },
+        });
     }
     async findByGlossaryId(glossaryId) {
         const glossary = await this.prisma.glossary.findUnique({
@@ -64,7 +72,7 @@ __decorate([
     (0, common_1.Get)('/glossary/:glossaryId'),
     __param(0, (0, common_1.Param)('glossaryId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], DisciplineController.prototype, "findByGlossaryId", null);
 __decorate([
@@ -79,14 +87,14 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], DisciplineController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], DisciplineController.prototype, "remove", null);
 exports.DisciplineController = DisciplineController = __decorate([
